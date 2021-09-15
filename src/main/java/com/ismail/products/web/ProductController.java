@@ -39,7 +39,8 @@ public class ProductController {
     }
 
     @PostMapping("/save")
-    public String save(){
+    public String save(Product product){
+        productRepository.save(product);
         return "formProduct";
     }
 }
