@@ -60,5 +60,15 @@ public class ProductController {
     public String def(){
         return "redirect:/user/index";
     }
+
+    @GetMapping("/403")
+    public  String accessDenied(){
+        return "403";
+    }
+    @GetMapping("/login")
+    public String login(){
+        return "login";
+    }
+
 }
 
