@@ -12,21 +12,21 @@
         <div class="panel panel-default">
             <div class="panel-heading">New Product</div>
             <div class="panel-body">
-                <form th:action="@{/save}" method="post">
+                <form th:action="@{/admin/save}" method="post">
                     <div class="form-group">
                         <label class="control-label">Designation</label>
                         <input class="form-control" th:value="${product.designation}" type="text" name="designation">
-                        <span th:errors="${product.designation}"></span>
+                        <span class="text-danger" th:errors="${product.designation}"></span>
                     </div>
                     <div class="form-group">
                         <label class="control-label">Price</label>
                         <input class="form-control" th:value="${product.price}" type="text" name="price">
-                        <span th:errors="${product.price}"></span>
+                        <span class="text-danger" th:errors="${product.price}"></span>
                     </div>
                     <div class="form-group">
                         <label class="control-label">Quantity</label>
                         <input class="form-control" th:value="${product.quantity}" type="text" name="quantity">
-                        <span th:errors="${product.quantity}"></span>
+                        <span class="text-danger" th:errors="${product.quantity}"></span>
                     </div>
                     <button class="btn btn-success">Save</button>
                 </form>

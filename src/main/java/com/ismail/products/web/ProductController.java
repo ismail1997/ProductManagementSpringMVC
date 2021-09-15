@@ -19,7 +19,7 @@ public class ProductController {
     @Autowired
     private ProductRepository productRepository;
 
-    @GetMapping("/index")
+    @GetMapping("/user/index")
     public String index(Model model,@RequestParam(name = "page",defaultValue = "0") int page,@RequestParam(name = "keyword",defaultValue = "") String keyword){
         Page<Product> pageOfProducts = productRepository.findByDesignationContains(keyword,PageRequest.of(page,6));
         model.addAttribute("products",pageOfProducts.getContent());
@@ -29,25 +29,36 @@ public class ProductController {
         return "products";
     }
 
-    @GetMapping("/delete")
+    @GetMapping("/admin/delete")
     public String delete(Long id,int page,String keyword){
         productRepository.deleteById(id);
-        return "redirect:/index?page="+page+"&keyword="+keyword;
+        return "redirect:/user/index?page="+page+"&keyword="+keyword;
     }
 
-    @GetMapping("/formProduct")
+    @GetMapping("/admin/formProduct")
     public String form(Model model){
         model.addAttribute("product",new Product());
         return "formProduct";
     }
 
-    @PostMapping("/save")
+    @PostMapping("/admin/save")
     public String save(Model model,@Valid Product product, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
             return "formProduct";
         }
         productRepository.save(product);
-        return "formProduct";
+        return "redirect:/user/index";
+    }
+
+    @GetMapping("/admin/edit")
+    public String edit(Model model,Long id){
+        Product product = productRepository.findById(id).get();
+        model.addAttribute("product",product);
+        return "editFormProduct";
+    }
+    @GetMapping("/")
+    public String def(){
+        return "redirect:/user/index";
     }
 }
 
