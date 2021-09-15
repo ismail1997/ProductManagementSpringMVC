@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
+               xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
                xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <meta charset="UTF-8">
@@ -18,10 +19,11 @@
                 <li><a href="#">Categories</a></li>
                 <li><a href="#">Catalogue</a></li>
             </ul>
+
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
                 <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-                <li><a th:href="@{/login?logout}" > Logout</a></li>
+                <li><a sec:authorize="isAuthenticated()" th:href="@{/login?logout}" > Logout</a></li>
             </ul>
         </div>
     </nav>
